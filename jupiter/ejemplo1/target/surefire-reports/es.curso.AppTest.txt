@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: es.curso.AppTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s - in es.curso.AppTest
+Tests run: 47, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.13 s - in es.curso.AppTest

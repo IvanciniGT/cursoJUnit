@@ -39,6 +39,8 @@ public class App {
     }
     
     public static double funcionRara(double numero){
+        if (numero <0)
+            throw new IllegalArgumentException("El numero "+numero+ " es negativo");
         if(numero==0) return 0;
         if(numero%2==0) return numero/2;
         // Si recibe un numero par, debe devolver la mitad

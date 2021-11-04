@@ -8,11 +8,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.DisplayName;
 
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.Alphanumeric;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import java.util.*;
+import java.util.stream.*;
 
 import java.util.logging.Logger;
 
@@ -55,6 +61,7 @@ public class AppTest {
         Assertions.assertEquals(numero,AppTest.instancia.getNumero());
     }
 
+    @DisplayName("Comprobar el reset sin modificaciones previas.")
     @Test
     @Order(2)
     public void pruebaResetSinModificarPreviamente() {
@@ -97,8 +104,24 @@ public class AppTest {
         log.info("    Fin prueba RARA");
     }
     
+    @Test
+    @Order(6)
+    public void pruebaRaraExcepcion() {
+        log.info("Ejecutando prueba RARA EXCEPTION");
+        AppTest.instancia=new App(-5);
+        Throwable excepcionLanzada=Assertions.assertThrows(IllegalArgumentException.class, 
+        //    () -> AppTest.instancia.funcionRara() );
+        //Assertions.assertThrows(IllegalArgumentException.class, 
+            AppTest.instancia::funcionRara );
+        
+        Assertions.assertTrue(excepcionLanzada.getMessage().indexOf("negativo")!=-1);
+            
+        log.info("    Fin prueba RARA");
+    }
+    
     
     @Test
+    @Disabled
     @Order(6)
     public void completo() {
         log.info("Ejecutando prueba Completa");
@@ -114,5 +137,32 @@ public class AppTest {
         Assertions.assertEquals(resultado_esperado, resultado_obtenido);
         log.info("    Fin prueba Completa");
     }
+
+
+    List<Integer> mis_numeros=Arrays.asList(1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10);
+
+    @TestFactory
+    public Stream<DynamicTest> probarSumasVariaditas(){
+        return mis_numeros.stream().
+            map( (numero) -> DynamicTest.dynamicTest("Prueba a sumar: "+numero, ()->{
+                    int numero_base=5;
+                    instancia=new App(numero_base);
+                    double RESULTADO=instancia.suma(numero).getNumero();
+                    Assertions.assertEquals( numero_base + numero , RESULTADO );
+                }
+            ));
+    }
     
+    
+    @TestFactory
+    public Stream<DynamicTest> probarRestasVariaditas(){
+        return mis_numeros.stream().
+            map( (numero) -> DynamicTest.dynamicTest("Prueba a sumar: "+numero, ()->{
+                    int numero_base=5;
+                    instancia=new App(numero_base);
+                    double RESULTADO=instancia.suma(numero).getNumero();
+                    Assertions.assertEquals( numero_base + numero , RESULTADO );
+                }
+            ));
+    }
 }
