@@ -1,0 +1,115 @@
+package es.curso;
+
+
+import org.junit.jupiter.api.Assertions;
+//import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+public class AppTest {
+    
+    @Test
+    public void pruebaSuma_Decimales() {
+        double numero1=5.1;
+        double numero2=6.1;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=11.2;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_Positivos() {
+        double numero1=5;
+        double numero2=6;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=11;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_Negativos() {
+        double numero1=-5;
+        double numero2=-6;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=-11;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_PositivoYNegativo() {
+        double numero1=5;
+        double numero2=-6;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=-1;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_NegativoYPositivo() {
+        double numero1=-5;
+        double numero2=6;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=1;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_CeroPositivo() {
+        double numero1=5;
+        double numero2=0;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=5;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }    
+    
+    @Test
+    public void pruebaSuma_CeroNegativo() {
+        double numero1=0;
+        double numero2=-6;
+        double resultado_obtenido=App.suma(numero1, numero2);
+        double resultado_esperado=-6;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido, 0.000001);
+    }
+    
+    @Test
+    public void pruebaRara_Cero() {
+        double numero1=0;
+        double resultado_obtenido=App.funcionRara(numero1);
+        double resultado_esperado=0;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido);
+    }
+    
+    @Test
+    public void pruebaRara_Par() {
+        double numero1=2;
+        double resultado_obtenido=App.funcionRara(numero1);
+        double resultado_esperado=1;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido);
+    }
+    
+    @Test
+    public void pruebaRara_Impar() {
+        double numero1=5;
+        double resultado_obtenido=App.funcionRara(numero1);
+        double resultado_esperado=10;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido);
+    }
+    
+    @Test
+    public void pruebaRara_ParNegativo() {
+        double numero1=-2;
+        double resultado_obtenido=App.funcionRara(numero1);
+        double resultado_esperado=-1;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido);
+    }
+    
+    @Test
+    public void pruebaRara_ImparNegativo() {
+        double numero1=-3;
+        double resultado_obtenido=App.funcionRara(numero1);
+        double resultado_esperado=-6;
+        Assertions.assertEquals(resultado_esperado, resultado_obtenido);
+    }
+    
+    
+}
